@@ -1,4 +1,5 @@
 #!/bin/sh
+# Tested on MacOS Ventura 13.3.1
 
 while true; do
     read -p "-> Have you accepted the xcode EULA [y/n]? " yn
