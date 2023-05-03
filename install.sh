@@ -6,6 +6,7 @@ installOMZ(){
     if [ -d ~/.oh-my-zsh ]; then
         echo "️😅 It looks like ️oh-my-zsh is already installed!"
     else
+        echo "💬 You'll need to 'exit' after OH-MY-ZSH is installed to get back to this menu" && sleep 3
  	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
         echo "✅ All done!"
     fi
@@ -117,7 +118,7 @@ customiseZSH(){
         cp passion.zsh-theme ~/.oh-my-zsh/themes/
     fi    
     echo "✅ All done!"
-    echo "Don't forget to update the colour profile in iTerm"
+    echo "💬 Don't forget to import and update the colour profile in iTerm"
     read -p "Press any key to Continue...."
 }
 
@@ -151,7 +152,7 @@ take_input()
                3) installCoreutils ;;
                4) customiseZSH ;;
                5) acceptEULA ;;
-               6) exit 0;;
+               6) echo "💬 Either close and re-open iTerm or run 'source ~/.zshrc'" && sleep 3 && exit 0;;
                #x) launchIterm ;;
                *) echo "Please chose a valid option!!"
                        read -p "Press any key to Continue...."
