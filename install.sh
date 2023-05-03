@@ -61,9 +61,15 @@ installIterm(){
     echo "Installing iTerm2..."
     ls /Applications | grep -i iterm.app
     if [[ $? != 0 ]] ; then
-        brew install --cask iterm2
-        echo "✅ All done! Continue the rest of the setup in iTerm2."
-	launchIterm &
+        which -s brew
+        if [[ $? != 1 ]] ; then
+            brew install --cask iterm2
+            echo "✅ All done! Continue the rest of the setup in iTerm2."
+	    open /Applications/iTerm.app
+            launchIterm &
+        else
+	    echo "Please install Homebrew🍺 first!"
+        fi
     else
         echo "😅 It looks like iTerm2 is already installed."
         launchIterm &
@@ -92,10 +98,8 @@ EOF
 customiseZSH(){
     echo "Customising ZSH - Let's get this party started!"
     brew install exa
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git 
-${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions 
-${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     git clone https://github.com/MohamedElashri/exa-zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/exa-zsh
     git clone https://github.com/b4b4r07/enhancd.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
@@ -121,15 +125,15 @@ ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 show_menu()
 {
        clear
-       echo "++++++++++++ MENU +++++++++++++"
-       echo "0. Install iTerm2"
-       echo "1. Install oh-my-zsh"
-       echo "2. Install homebrew🍺"
-       echo "3. Accept xcode EULA"
-       echo "4. Install coreutils"
-       echo "5. Customise ZSH"
+       echo "+*+*+*+*+*+*+*+*+*+*+*+ MENU +*+*+*+*+*+*+*+*+*+*+*+*+"
+       echo "0. Install homebrew🍺"
+       echo "1. Install iTerm2"
+       echo "2. Install oh-my-zsh"
+       echo "3. Install coreutils"
+       echo "4. Customise ZSH"
+       echo "5. Accept Xcode EULA (Probably not needed)"
        echo "6. Exit"
-       echo "+++++++++++++++++++++++++++++++"
+       echo "+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+"
 }
 
 # function to take input
@@ -141,12 +145,12 @@ take_input()
         
        #using switch case statement check the choice and call function.
        case $choice in
-               0) installIterm ;;
-               1) installOMZ ;;
-               2) installHomebrew ;;
-               3) acceptEULA ;;
-               4) installCoreutils ;;
-               5) customiseZSH ;;
+               0) installHomebrew ;;
+               1) installIterm ;;
+               2) installOMZ ;;
+               3) installCoreutils ;;
+               4) customiseZSH ;;
+               5) acceptEULA ;;
                6) exit 0;;
                #x) launchIterm ;;
                *) echo "Please chose a valid option!!"
