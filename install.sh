@@ -70,6 +70,8 @@ installIterm(){
             launchIterm &
         else
 	    echo "Please install Homebrew🍺 first!"
+            sleep 3
+            return       
         fi
     else
         echo "😅 It looks like iTerm2 is already installed."
@@ -97,7 +99,7 @@ EOF
 
 # function to install ZSH plugins and passion theme
 customiseZSH(){
-    echo "Customising ZSH - Let's get this party started!"
+    echo "Customising ZSH - Let's get this party started! 🥳 "
     brew install exa
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
